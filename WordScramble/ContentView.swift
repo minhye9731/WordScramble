@@ -41,6 +41,9 @@ struct ContentView: View {
             .navigationTitle(rootWord)
             .onSubmit(addNewWord)
             .onAppear(perform: startGame)
+            .toolbar {
+                Button("Restart", action: startGame)
+            }
             .alert(errorTitle, isPresented: $showingError) {
                 Button("OK", role: .cancel) { }
             } message: {
