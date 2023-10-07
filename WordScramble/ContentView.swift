@@ -56,7 +56,13 @@ struct ContentView: View {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         guard answer.count > 0 else { return }
         
-        //Exyra validation to come
+        //Extra validation to come
+        guard answer.count > 2 else { // challenge1
+            wordError(title: "Word is too short", message: "It shouldn't be shorter than three letters")
+            return
+        }
+        
+        
         guard isOriginal(word: answer) else {
             wordError(title: "Word used already", message: "Be more original!")
             return
