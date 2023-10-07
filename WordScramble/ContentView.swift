@@ -17,6 +17,8 @@ struct ContentView: View {
     @State private var errorMessage = ""
     @State private var showingError = false
     
+    @State private var scoreValue = 0
+    
     
     var body: some View {
         
@@ -36,6 +38,12 @@ struct ContentView: View {
                         }
                         
                     }
+                }
+                
+                Section {
+                    Text("\(scoreValue)")
+                } header: {
+                    Text("Total Score")
                 }
             }
             .navigationTitle(rootWord)
@@ -84,7 +92,7 @@ struct ContentView: View {
         withAnimation {
             usedWords.insert(answer, at: 0)
         }
-        
+        scoreValue += answer.count
         newWord = ""
     }
     
@@ -93,6 +101,7 @@ struct ContentView: View {
             if let startWords = try? String(contentsOf: startWordsURL) {
                 let allWords = startWords.components(separatedBy: "\n")
                 rootWord = allWords.randomElement() ?? "silkworm"
+                scoreValue = 0
                 return
             }
         }
